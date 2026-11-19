@@ -140,8 +140,14 @@ Deletes a file or directory. **There is no recycle bin**, deleted is gone.
 rm India/Mumbai/city.txt   # delete file city.txt
 rm -r Egypt/Cairo          # delete directory Cairo and everything inside
 rm -i file.txt             # ask for confirmation before deleting
+rm -rf Egypt/Cairo         # force delete: no prompts, no error if it doesn't exist
 rmdir Asia                 # delete a directory only if it is empty
 ```
+
+- `-r`: recursive, deletes the directory and everything inside it.
+- `-f`: force, never asks for confirmation (even for write-protected files) and ignores missing files.
+
+> **Be careful with `rm -rf`.** It deletes everything silently and can't be undone. Run `pwd` and `ls` first to check what you're deleting. Never run it on `/` or `~`.
 
 ## cat
 
