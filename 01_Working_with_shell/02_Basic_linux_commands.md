@@ -1,6 +1,6 @@
 # Basic Linux Commands
 
-Paths used below (absolute vs relative) are explained in [[01_Intro_to_shell]].
+Paths used below (absolute vs relative) are explained in [[03_Paths]].
 
 ## pwd
 
@@ -77,13 +77,13 @@ popd                         # remove /etc, go back to home
 
 Step by step:
 
-| Command           | You are now in    | Stack (left = top)     |
-| ----------------- | ----------------- | ---------------------- |
-| start             | `/home/fiftyfive` | `~`                    |
-| `pushd /etc`      | `/etc`            | `/etc ~`               |
-| `pushd /var/log`  | `/var/log`        | `/var/log /etc ~`      |
-| `popd`            | `/etc`            | `/etc ~`               |
-| `popd`            | `/home/fiftyfive` | `~`                    |
+| Command          | You are now in    | Stack (left = top) |
+| ---------------- | ----------------- | ------------------ |
+| start            | `/home/fiftyfive` | `~`                |
+| `pushd /etc`     | `/etc`            | `/etc ~`           |
+| `pushd /var/log` | `/var/log`        | `/var/log /etc ~`  |
+| `popd`           | `/etc`            | `/etc ~`           |
+| `popd`           | `/home/fiftyfive` | `~`                |
 
 ### Why use it instead of cd?
 
@@ -169,13 +169,13 @@ Shows a file one screen at a time (read-only).
 more Asia/China/country.txt
 ```
 
-| Key     | Action                     |
-| ------- | -------------------------- |
-| `Space` | Next screen                |
-| `Enter` | Next line                  |
-| `b`     | Previous screen (go back)  |
-| `/text` | Search for `text`          |
-| `q`     | Quit                       |
+| Key     | Action                    |
+| ------- | ------------------------- |
+| `Space` | Next screen               |
+| `Enter` | Next line                 |
+| `b`     | Previous screen (go back) |
+| `/text` | Search for `text`         |
+| `q`     | Quit                      |
 
 ## less
 
@@ -193,3 +193,72 @@ less Asia/China/country.txt
 | `n` / `N`           | Next / previous match     |
 | `g` / `G`           | Go to start / end of file |
 | `q`                 | Quit                      |
+
+## Getting Help
+
+Use these when you forget what a command does or which options it has.
+
+| Command          | Use when you want...                                 |
+| ---------------- | ---------------------------------------------------- |
+| `whatis cmd`     | a one-line description of a command                  |
+| `cmd --help`     | a quick list of options                              |
+| `help cmd`       | help for a **built-in** command (`cd`, `pushd`)      |
+| `man cmd`        | the full manual                                      |
+| `apropos word`   | to find a command when you don't know its name       |
+
+### whatis
+
+Shows a one-line description of a command (taken from its man page).
+
+```bash
+whatis date
+# date (1)             - print or set the system date and time
+```
+
+> The `(1)` is the man page section. See `man` below.
+
+### --help
+
+Most external commands print a short summary of their usage and options with `--help`.
+
+```bash
+date --help
+ls --help | less     # long output? pipe it into less to scroll
+```
+
+Built-in commands (see [[01_Intro_to_shell]]) usually don't support `--help`. Use `help` instead:
+
+```bash
+help cd
+help pushd
+```
+
+### man
+
+Opens the full **manual page** of a command: description, all options, examples.
+
+```bash
+man ls
+man 5 passwd     # open section 5 (file format) instead of section 1
+```
+
+- Scroll and search with the same keys as `less` (`Space`, `b`, `/text`, `n`, `q`).
+- Common sections:
+
+| Section | Contains                              |
+| ------- | ------------------------------------- |
+| 1       | User commands (`ls`, `date`)          |
+| 5       | File formats (`/etc/passwd`)          |
+| 8       | Admin / root commands (`mount`)       |
+
+### apropos
+
+Searches the names and descriptions of all man pages for a keyword. Use it when you know **what you want to do** but not the command name.
+
+```bash
+apropos "copy files"     # finds cp, and other commands about copying
+apropos directory        # lists commands related to directories
+man -k directory         # same as apropos
+```
+
+> If `whatis` or `apropos` prints `nothing appropriate`, the search database may be missing. Build it with `sudo mandb`.

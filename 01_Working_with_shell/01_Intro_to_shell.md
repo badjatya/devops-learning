@@ -1,75 +1,50 @@
 # Introduction to Shell in Linux
 
-A shell is a program that takes the commands we type and asks the Linux operating system (the kernel) to run them. It is also called a command-line interpreter. The most common shell on Linux is **Bash** (`/bin/bash`).
+- A **shell** is a program that takes the commands you type and asks the Linux kernel to run them.
+- Also called a **command-line interpreter**.
+- Most common shell on Linux: **Bash** (`/bin/bash`).
 
 ## Types of Shell Commands
 
-1. Built-In Commands
-2. External Commands
+1. Built-in commands
+2. External commands
 
-## 01 Built-In Commands
+## 01 Built-in Commands
 
-These are commands that are built into the shell program itself. The shell runs them directly, without starting a separate program, so they are fast. They are part of the shell (for example Bash), not of the Linux distribution.
+- Built into the shell program itself (part of Bash, not of the Linux distribution).
+- The shell runs them directly without starting a separate program, so they are fast.
 
-### Some Examples of Built-In Commands
+Examples:
 
-1. **`echo`**: This command is used to print text in the shell.
-2. **`cd`**: This command is used to change the working directory.
-3. **`pwd`**: This command is used to print the present working directory.
+| Command | Use                                   |
+| ------- | ------------------------------------- |
+| `echo`  | Print text in the shell               |
+| `cd`    | Change the working directory          |
+| `pwd`   | Print the present working directory   |
+| `type`  | Show whether a command is built-in    |
 
 ## 02 External Commands
 
-These are commands that are not part of the shell. Each one is a separate program (an executable file) stored on disk, usually in directories like `/bin` or `/usr/bin`. The shell finds them by searching the directories listed in the `PATH` variable. Most common ones come pre-installed with the system (for example in the `coreutils` package); others can be installed with a package manager such as `apt` or `yum`.
+- Not part of the shell. Each one is a separate program (an executable file) stored on disk.
+- Usually stored in `/bin` or `/usr/bin`.
+- The shell finds them by searching the directories listed in the `PATH` variable.
+- Most come pre-installed (for example in the `coreutils` package). Others are installed with a package manager such as `apt` or `yum`.
 
-### Some Examples of External Commands
+Examples:
 
-1. **`mv`**: This command is used to move a file from one directory to another directory. It is also used to rename a file.
-2. **`cp`**: This command is used to copy a file from one directory to another directory.
-3. **`date`**: This command is used to print the current local date and time of the system.
-4. **`uptime`**: This command is used to check how long the system has been running since the last reboot.
+| Command  | Use                                                    |
+| -------- | ------------------------------------------------------ |
+| `mv`     | Move or rename a file or directory                     |
+| `cp`     | Copy a file or directory                               |
+| `date`   | Print the current local date and time                  |
+| `uptime` | Show how long the system has been running since boot   |
 
-## How to Check the Type of a Command
-
-Use the `type` command to see whether a command is built-in or external:
+## Check the Type of a Command
 
 ```bash
 type echo     # echo is a shell builtin
 type mv       # mv is /usr/bin/mv
+echo $PATH    # directories the shell searches for external commands
 ```
 
-## Paths
-
-A path tells the shell where a file or directory is. There are two types:
-
-1. Absolute path
-2. Relative path
-
-Special path symbols:
-
-| Symbol | Meaning                                                |
-| ------ | ------------------------------------------------------ |
-| `/`    | Root directory (top of the file system)                |
-| `~`    | Home directory of the current user (`/home/fiftyfive`) |
-| `.`    | Current directory                                      |
-| `..`   | Parent directory (one level up)                        |
-
-### Absolute Path
-
-- Full path starting from the root `/`.
-- Works the same no matter which directory you are in.
-
-```bash
-cd /home/fiftyfive/Asia
-cd ~/Asia        # same as above, ~ expands to /home/fiftyfive
-```
-
-### Relative Path
-
-- Path starting from the **current directory** (does not start with `/`).
-- Result depends on where you are right now (check with `pwd`).
-
-```bash
-# Current directory: /home/fiftyfive
-cd Asia          # goes to /home/fiftyfive/Asia
-cd ../Europe     # from Asia: go up one level, then into Europe
-```
+Next: [[02_Basic_linux_commands]], [[03_Paths]]
