@@ -36,3 +36,40 @@ Use the `type` command to see whether a command is built-in or external:
 type echo     # echo is a shell builtin
 type mv       # mv is /usr/bin/mv
 ```
+
+## Paths
+
+A path tells the shell where a file or directory is. There are two types:
+
+1. Absolute path
+2. Relative path
+
+Special path symbols:
+
+| Symbol | Meaning                                                |
+| ------ | ------------------------------------------------------ |
+| `/`    | Root directory (top of the file system)                |
+| `~`    | Home directory of the current user (`/home/fiftyfive`) |
+| `.`    | Current directory                                      |
+| `..`   | Parent directory (one level up)                        |
+
+### Absolute Path
+
+- Full path starting from the root `/`.
+- Works the same no matter which directory you are in.
+
+```bash
+cd /home/fiftyfive/Asia
+cd ~/Asia        # same as above, ~ expands to /home/fiftyfive
+```
+
+### Relative Path
+
+- Path starting from the **current directory** (does not start with `/`).
+- Result depends on where you are right now (check with `pwd`).
+
+```bash
+# Current directory: /home/fiftyfive
+cd Asia          # goes to /home/fiftyfive/Asia
+cd ../Europe     # from Asia: go up one level, then into Europe
+```
